@@ -5,7 +5,11 @@ if(ENABLE_GazeboYarpPluginLoader)
     add_library(GazeboYarpPluginLoader MODULE GazeboYarpPluginLoader.cpp
                                                 GazeboYarpPluginLoader.hpp
                                                 LogComponent.hpp
-                                                LogComponent.cpp)
+                                                LogComponent.cpp
+                                                OyplPeriodicWrite.cpp
+                                                OyplPeriodicWrite.hpp
+                                                OyplPortReader.cpp
+                                                OyplPortReader.hpp)
 
     target_link_libraries(GazeboYarpPluginLoader YARP::YARP_os
                                                    YARP::YARP_init
