@@ -1,3 +1,10 @@
+cmake_minimum_required(VERSION 3.22)
+
+find_package(gazebo REQUIRED)
+include_directories(${GAZEBO_INCLUDE_DIRS})
+link_directories(${GAZEBO_LIBRARY_DIRS})
+list(APPEND CMAKE_CXX_FLAGS "${GAZEBO_CXX_FLAGS}")
+
 option(ENABLE_GazeboYarpPluginLoader "Enable/disable GazeboYarpPluginLoader" ON)
 
 if(ENABLE_GazeboYarpPluginLoader)
@@ -5,11 +12,7 @@ if(ENABLE_GazeboYarpPluginLoader)
     add_library(GazeboYarpPluginLoader MODULE GazeboYarpPluginLoader.cpp
                                                 GazeboYarpPluginLoader.hpp
                                                 LogComponent.hpp
-                                                LogComponent.cpp
-                                                OyplPeriodicWrite.cpp
-                                                OyplPeriodicWrite.hpp
-                                                OyplPortReader.cpp
-                                                OyplPortReader.hpp)
+                                                LogComponent.cpp)
 
     target_link_libraries(GazeboYarpPluginLoader YARP::YARP_os
                                                    YARP::YARP_init
