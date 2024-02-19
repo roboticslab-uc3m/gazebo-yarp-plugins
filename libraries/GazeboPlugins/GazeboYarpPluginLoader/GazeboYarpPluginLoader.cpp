@@ -106,11 +106,11 @@ GazeboYarpPluginLoader::~GazeboYarpPluginLoader()
         yarpPlugins[i] = 0;
     }
 
-    oyplRpcServer.interrupt();
+    /*oyplRpcServer.interrupt();
     oyplPeriodicWrite.interrupt();
 
     oyplRpcServer.close();
-    oyplPeriodicWrite.close();
+    oyplPeriodicWrite.close();*/
 }
 
 // -----------------------------------------------------------------------------
@@ -118,6 +118,7 @@ GazeboYarpPluginLoader::~GazeboYarpPluginLoader()
 bool GazeboYarpPluginLoader::addYarpPluginsLists(yarp::os::Bottle& info)
 {
     // Similar functionality, adapted for Gazebo context
+    return true;
 }
 
 // -----------------------------------------------------------------------------
@@ -125,6 +126,7 @@ bool GazeboYarpPluginLoader::addYarpPluginsLists(yarp::os::Bottle& info)
 int GazeboYarpPluginLoader::main(const std::string& cmd)
 {
     // Process command specific to Gazebo and YARP integration
+    return true;
 }
 
 // -----------------------------------------------------------------------------
@@ -132,6 +134,7 @@ int GazeboYarpPluginLoader::main(const std::string& cmd)
 bool GazeboYarpPluginLoader::Open(std::ostream& sout, std::istream& sinput)
 {
     // Adapted functionality for opening YARP plugins in Gazebo
+    return true;
 }
 
 // -----------------------------------------------------------------------------
@@ -139,6 +142,7 @@ bool GazeboYarpPluginLoader::Open(std::ostream& sout, std::istream& sinput)
 bool GazeboYarpPluginLoader::GetWorld(std::ostream& sout, std::istream& sinput)
 {
     // Functionality to get and handle the Gazebo world pointer or information
+    return true;
 }
 
 // -----------------------------------------------------------------------------
@@ -146,5 +150,6 @@ bool GazeboYarpPluginLoader::GetWorld(std::ostream& sout, std::istream& sinput)
 bool GazeboYarpPluginLoader::close(const int i)
 {
     // Similar to the original, adjusted for Gazebo context
+    return true;
 }
 
