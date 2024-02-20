@@ -25,7 +25,7 @@ namespace
 
         if (options.check("wrap"))
         {
-            yCInfo(ORYPL) << "Requested subdevice wrapping mode";
+            yCInfo(GYPL) << "Requested subdevice wrapping mode";
             return driver->open(options);
         }
 
@@ -38,7 +38,7 @@ namespace
 
         if (!driver->open(mainOptions))
         {
-            yCError(ORYPL) << "Could not open main device";
+            yCError(GYPL) << "Could not open main device";
             return false;
         }
 
@@ -46,7 +46,7 @@ namespace
 
         if (!driver->view(wrapper))
         {
-            yCError(ORYPL) << "Could not view WrapperSingle";
+            yCError(GYPL) << "Could not view WrapperSingle";
             return false;
         }
 
@@ -55,13 +55,13 @@ namespace
 
         if (!subDriver->open(subOptions))
         {
-            yCError(ORYPL) << "Could not open subdevice";
+            yCError(GYPL) << "Could not open subdevice";
             return false;
         }
 
         if (!wrapper->attach(subDriver))
         {
-            yCError(ORYPL) << "Could not attach subdevice";
+            yCError(GYPL) << "Could not attach subdevice";
             return false;
         }
 
@@ -93,7 +93,7 @@ namespace
 
 // -----------------------------------------------------------------------------
 GazeboYarpPluginLoader::GazeboYarpPluginLoader(gazebo::physics::WorldPtr world) : world(world){
-    yCInfo(ORYPL) << "GazeboYarpPluginLoader constructor";
+    yCInfo(GYPL) << "GazeboYarpPluginLoader constructor";
 
 }
 

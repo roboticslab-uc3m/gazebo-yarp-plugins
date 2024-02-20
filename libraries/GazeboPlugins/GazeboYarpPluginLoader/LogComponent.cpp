@@ -1,3 +1,3 @@
 #include "LogComponent.hpp"
 
-YARP_LOG_COMPONENT(ORYPL, "rl.OpenraveYarpPluginLoader")
+YARP_LOG_COMPONENT(GYPL, "rl.OpenraveYarpPluginLoader")
