@@ -93,8 +93,10 @@ namespace
 
 // -----------------------------------------------------------------------------
 GazeboYarpPluginLoader::GazeboYarpPluginLoader(gazebo::physics::WorldPtr world) : world(world){
-    yCInfo(GYPL) << "GazeboYarpPluginLoader constructor";
-
+    yCInfo(GYPL) << "Checking for yarp network...";
+    if ( ! yarp.checkNetwork() )
+        yCError(GYPL) << "Found no yarp network (try running \"yarpserver &\")";
+    yCInfo(GYPL) << "Found yarp network";
 }
 
 GazeboYarpPluginLoader::~GazeboYarpPluginLoader()
@@ -105,12 +107,6 @@ GazeboYarpPluginLoader::~GazeboYarpPluginLoader()
         delete yarpPlugins[i];
         yarpPlugins[i] = 0;
     }
-
-    /*oyplRpcServer.interrupt();
-    oyplPeriodicWrite.interrupt();
-
-    oyplRpcServer.close();
-    oyplPeriodicWrite.close();*/
 }
 
 // -----------------------------------------------------------------------------
@@ -149,7 +145,13 @@ bool GazeboYarpPluginLoader::GetWorld(std::ostream& sout, std::istream& sinput)
 
 bool GazeboYarpPluginLoader::close(const int i)
 {
-    // Similar to the original, adjusted for Gazebo context
+    if(!yarpPlugins[i]->close())
+    {
+        yCError(GYPL) << "Could not close" << i;
+        return false;
+    }
+    yarpPluginsProperties[i].put("remotelyClosed",1);
+    yCInfo(GYPL) << "Closed yarp plugin with id" << i;
     return true;
 }
 
