@@ -175,4 +175,3 @@ bool GazeboYarpPluginLoader::close(const int i)
     yCInfo(GYPL) << "Closed yarp plugin with id" << i;
     return true;
 }
-

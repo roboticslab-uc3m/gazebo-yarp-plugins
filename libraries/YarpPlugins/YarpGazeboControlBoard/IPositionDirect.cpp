@@ -16,6 +16,12 @@ bool YarpGazeboControlBoard::getAxes(int *ax)
 
 bool YarpGazeboControlBoard::setPosition(int j, double ref)
 {
+    auto joints = this->robotModel->GetJoints();
+    auto joint  = this->robotModel->GetJoint(joints[j]->GetName());
+    if(joint)
+    {
+        joint->SetPosition(0, ref);
+    }
     return true;
 }
 
