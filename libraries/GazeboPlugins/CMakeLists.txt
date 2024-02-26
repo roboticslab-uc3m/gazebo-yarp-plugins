@@ -1,1 +1,1 @@
-add_subdirectory(GazeboYarpPluginLoader)
+add_subdirectory(GazeboModelYarpPluginLoader)
