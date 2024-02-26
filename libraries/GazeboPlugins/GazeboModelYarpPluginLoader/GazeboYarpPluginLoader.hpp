@@ -13,10 +13,9 @@
 #include <gazebo/gazebo.hh>
 #include <gazebo/physics/physics.hh>
 #include <gazebo/common/common.hh>
-#include <gazebo/common/common.hh>
 #include <gazebo/msgs/msgs.hh>
 
-namespace roboticslab
+namespace gazebo
 {
 
 /**
@@ -29,17 +28,17 @@ namespace roboticslab
  * @ingroup GazeboYarpPluginLoader
  * @brief Loads one or several YARP Plugins, passing world pointer.
  */
-    class GazeboYarpPluginLoader : public gazebo::ModelPlugin
+    class GazeboYarpPluginLoader : public ModelPlugin
     {
         public:
             GazeboYarpPluginLoader(gazebo::physics::WorldPtr world);
             ~GazeboYarpPluginLoader();
 
-            bool addYarpPluginsLists(yarp::os::Bottle & info);
-            int main(const std::string& cmd);
+            void Load(physics::WorldPtr _world, sdf::ElementPtr _sdf);
 
-            bool Open(std::ostream& sout, std::istream& sinput);
-            bool GetWorld(std::ostream& sout, std::istream& sinput);
+            bool addYarpPluginsLists(yarp::os::Bottle & info);
+            //bool Open(std::ostream& sout, std::istream& sinput);
+            //bool GetWorld(std::ostream& sout, std::istream& sinput);
             bool close(const int i);
 
         private:
@@ -50,6 +49,7 @@ namespace roboticslab
             yarp::os::RpcServer oyplRpcServer;
             
             gazebo::physics::WorldPtr world; // Referencia al mundo de Gazebo
+            physics::ModelPtr robotModel;
     };
 
 } // namespace roboticslab

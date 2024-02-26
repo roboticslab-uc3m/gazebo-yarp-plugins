@@ -14,7 +14,7 @@
 
 #include "LogComponent.hpp"
 
-using namespace roboticslab;
+using namespace gazebo;
 
 namespace
 {
@@ -109,24 +109,44 @@ GazeboYarpPluginLoader::~GazeboYarpPluginLoader()
     }
 }
 
+void GazeboYarpPluginLoader::Load(physics::WorldPtr _world, sdf::ElementPtr _sdf)
+{
+    this->robotModel = _world->ModelByName("TEO_fixed");
+
+    if (!this->robotModel)
+    {
+        gzerr << "Modelo del robot no encontrado.\n";
+        return;
+    }
+    else 
+    {
+        printf("Modelo del robot encontrado!\n");
+    }
+}
+
 // -----------------------------------------------------------------------------
 
 bool GazeboYarpPluginLoader::addYarpPluginsLists(yarp::os::Bottle& info)
 {
-    // Similar functionality, adapted for Gazebo context
+    for (size_t i=0;i<yarpPluginsProperties.size();i++)
+    {
+        if(yarpPluginsProperties[i].check("remotelyClosed"))
+            continue;
+        yarp::os::Bottle& b = info.addList();
+        b.addInt32(i);
+        yarp::os::Property openOptions(yarpPluginsProperties[i]);
+        openOptions.unput("penv");
+        openOptions.unput("allManipulators");
+        openOptions.unput("allSensors");
+        yarp::os::Bottle openOptionsBottle;
+        openOptionsBottle.fromString(openOptions.toString());
+        b.append(openOptionsBottle);
+    }
     return true;
 }
 
 // -----------------------------------------------------------------------------
-
-int GazeboYarpPluginLoader::main(const std::string& cmd)
-{
-    // Process command specific to Gazebo and YARP integration
-    return true;
-}
-
-// -----------------------------------------------------------------------------
-
+/**
 bool GazeboYarpPluginLoader::Open(std::ostream& sout, std::istream& sinput)
 {
     // Adapted functionality for opening YARP plugins in Gazebo
@@ -141,6 +161,7 @@ bool GazeboYarpPluginLoader::GetWorld(std::ostream& sout, std::istream& sinput)
     return true;
 }
 
+*/
 // -----------------------------------------------------------------------------
 
 bool GazeboYarpPluginLoader::close(const int i)

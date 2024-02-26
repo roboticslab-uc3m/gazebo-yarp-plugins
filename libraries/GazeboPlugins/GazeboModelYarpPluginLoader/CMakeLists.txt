@@ -1,5 +1,13 @@
 cmake_minimum_required(VERSION 3.22)
 
+# Busca el paquete YARP
+find_package(YARP REQUIRED)
+
+# Verifica si se encontró el paquete YARP
+if(NOT YARP_FOUND)
+    message(FATAL_ERROR "YARP not found. Please install YARP or adjust your CMake configuration.")
+endif()
+
 find_package(gazebo REQUIRED)
 include_directories(${GAZEBO_INCLUDE_DIRS})
 link_directories(${GAZEBO_LIBRARY_DIRS})
