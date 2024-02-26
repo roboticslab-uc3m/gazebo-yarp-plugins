@@ -16,6 +16,8 @@ bool YarpGazeboControlBoard::getAxes(int *ax)
 
 bool YarpGazeboControlBoard::setPosition(int j, double ref)
 {
+    yCTrace(ECB) << j << ref;
+
     auto joints = this->robotModel->GetJoints();
     auto joint  = this->robotModel->GetJoint(joints[j]->GetName());
     if(joint)
@@ -27,12 +29,24 @@ bool YarpGazeboControlBoard::setPosition(int j, double ref)
 
 bool YarpGazeboControlBoard::setPositions(const double *refs)
 {
-    return true;
+    yCTrace(ECB);
+    bool ok = true;
+    
+    for (unsigned int i = 0; i < axes; i++)
+        ok &= setPosition(i, refs[i]);
+    return ok;
 }
 
 bool YarpGazeboControlBoard::setPositions(int n_joint, const int *joints, const double *refs)
 {
-    return true;
+    yCTrace(ECB) << n_joint;
+    bool ok = true;
+    
+    for (int i = 0; i < n_joint; i++)
+    {
+        ok &= setPosition(joints[i], refs[i]);
+    }
+    return ok;
 }
 
 bool YarpGazeboControlBoard::getRefPosition(int j, double *ref)
