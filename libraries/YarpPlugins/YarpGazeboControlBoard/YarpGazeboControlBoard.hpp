@@ -48,7 +48,7 @@ namespace roboticslab {
             std::vector<double> encRawExposed;
             std::vector<double> targetExposed;
 
-            gazebo::physics::ModelPtr robotModel;
+            gazebo::physics::ModelPtr _robotModel;
 
     };
 

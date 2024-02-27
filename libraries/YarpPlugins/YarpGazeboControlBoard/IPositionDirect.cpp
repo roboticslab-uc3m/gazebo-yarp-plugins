@@ -18,8 +18,8 @@ bool YarpGazeboControlBoard::setPosition(int j, double ref)
 {
     yCTrace(ECB) << j << ref;
 
-    auto joints = this->robotModel->GetJoints();
-    auto joint  = this->robotModel->GetJoint(joints[j]->GetName());
+    auto joints = _robotModel->GetJoints();
+    auto joint  = _robotModel->GetJoint(joints[j]->GetName());
     if(joint)
     {
         joint->SetPosition(0, ref);
