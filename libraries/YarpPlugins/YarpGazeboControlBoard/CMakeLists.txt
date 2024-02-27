@@ -29,7 +29,7 @@ if(NOT SKIP_YarpGazeboControlBoard)
 
     target_link_libraries(YarpGazeboControlBoard YARP::YARP_os
                                                    YARP::YARP_dev
-                                                   Boost::boost)
+                                                   ${GAZEBO_LIBRARIES})
 
     yarp_install(TARGETS YarpGazeboControlBoard
                  LIBRARY DESTINATION  ${ROBOTICSLAB-GAZEBO-YARP-PLUGINS_DYNAMIC_PLUGINS_INSTALL_DIR}

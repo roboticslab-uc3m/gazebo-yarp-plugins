@@ -24,7 +24,8 @@ if(ENABLE_GazeboYarpPluginLoader)
 
     target_link_libraries(GazeboYarpPluginLoader YARP::YARP_os
                                                  YARP::YARP_init
-                                                 YARP::YARP_dev)
+                                                 YARP::YARP_dev
+                                                 ${GAZEBO_LIBRARIES})
 
     #include(InstallGazeboPlugin)
     #install_gazebo_plugin(GazeboYarpPluginLoader)
