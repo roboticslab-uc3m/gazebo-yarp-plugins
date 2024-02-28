@@ -14,7 +14,7 @@ yarp_prepare_plugin(YarpGazeboControlBoard
                     TYPE roboticslab::YarpGazeboControlBoard
                     INCLUDE YarpGazeboControlBoard.hpp
                     DEFAULT ON
-                    EXTRA_CONFIG WRAPPER=controlBoardGazebo_nws_yarp)
+                    EXTRA_CONFIG WRAPPER=controlBoard_nws_yarp)
 
 find_package(Boost REQUIRED)
 
