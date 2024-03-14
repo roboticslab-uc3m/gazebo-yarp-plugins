@@ -1,3 +1,7 @@
+cmake_minimum_required(VERSION 3.22)
+
+# Busca el paquete YARP
+find_package(YARP REQUIRED)
 
 # Verifica si se encontró el paquete YARP
 if(NOT YARP_FOUND)
@@ -24,6 +28,20 @@ if(NOT SKIP_YarpGazeboControlBoard)
                                             IDeviceDriver.cpp
                                             IAxisInfo.cpp
                                             IPositionDirect.cpp
+                                            IJointFault.cpp
+                                            IPidControl.cpp
+                                            IPositionControl.cpp
+                                            IVelocityControl.cpp
+                                            IMotor.cpp
+                                            IMotorEncoders.cpp
+                                            IAmplifierControl.cpp
+                                            IControlLimits.cpp
+                                            IControlCalibration.cpp
+                                            ITorqueControl.cpp
+                                            IImpedanceControl.cpp
+                                            IEncoders.cpp
+                                            IEncodersTimed.cpp
+                                            IInteractionMode.cpp
                                             LogComponent.hpp
                                             LogComponent.cpp)
 
