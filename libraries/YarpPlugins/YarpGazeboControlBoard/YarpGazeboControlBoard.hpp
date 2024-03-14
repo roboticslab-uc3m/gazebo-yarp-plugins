@@ -132,13 +132,13 @@ namespace roboticslab {
             bool getEncoderTimed (int j, double *encs, double *time);
 
             // ------ IMotor declarations. Implementation in IMotor.cpp ------
-            bool getNumberOfMotors(int *num)
-            bool getTemperature(int m, double *val)
-            bool getTemperatures(double *vals)
-            bool getTemperatureLimit(int m, double *temp)
-            bool setTemperatureLimit(int m, const double temp)
-            bool getGearboxRatio(int m, double *val)
-            bool setGearboxRatio(int m, const double val)
+            bool getNumberOfMotors(int *num) override;
+            bool getTemperature(int m, double *val) override;
+            bool getTemperatures(double *vals) override;
+            bool getTemperatureLimit(int m, double *temp) override;
+            bool setTemperatureLimit(int m, const double temp) override;
+            bool getGearboxRatio(int m, double *val) override;
+            bool setGearboxRatio(int m, const double val) override;
 
             // ------ IMotorEncoders declarations. Implementation in IMotorEncoders.cpp ------
             bool getNumberOfMotorEncoders(int *num) override;
