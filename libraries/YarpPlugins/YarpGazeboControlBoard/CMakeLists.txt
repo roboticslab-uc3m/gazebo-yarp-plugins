@@ -25,25 +25,18 @@ find_package(Boost REQUIRED)
 if(NOT SKIP_YarpGazeboControlBoard)
 
     yarp_add_plugin(YarpGazeboControlBoard YarpGazeboControlBoard.hpp
-                                            IDeviceDriver.cpp
-                                            IAxisInfo.cpp
-                                            IPositionDirect.cpp
-                                            IJointFault.cpp
-                                            IPidControl.cpp
-                                            IPositionControl.cpp
-                                            IVelocityControl.cpp
-                                            IMotor.cpp
-                                            IMotorEncoders.cpp
-                                            IAmplifierControl.cpp
-                                            IControlLimits.cpp
-                                            IControlCalibration.cpp
-                                            ITorqueControl.cpp
-                                            IImpedanceControl.cpp
-                                            IEncoders.cpp
-                                            IEncodersTimed.cpp
-                                            IInteractionMode.cpp
+                                            DeviceDriverImpl.cpp
+                                            EmulatedControlBoard.cpp
+                                            IControlLimitsImpl.cpp
+                                            IControlModeImpl.cpp
+                                            IEncodersImpl.cpp
+                                            IPositionControlImpl.cpp
+                                            IPositionDirectImpl.cpp
+                                            IVelocityControlImpl.cpp
+                                            LogComponent.cpp
                                             LogComponent.hpp
-                                            LogComponent.cpp)
+                                            PeriodicThreadImpl.cpp
+                                            SharedArea.cpp)
 
     target_link_libraries(YarpGazeboControlBoard YARP::YARP_os
                                                    YARP::YARP_dev
