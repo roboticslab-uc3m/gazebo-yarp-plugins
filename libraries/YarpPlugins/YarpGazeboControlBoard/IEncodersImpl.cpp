@@ -1,11 +1,15 @@
-
 #include "YarpGazeboControlBoard.hpp"
 
-#include <yarp/os/LogStream.h>
+#include <yarp/os/Log.h>
 
 #include "LogComponent.hpp"
 
 using namespace roboticslab;
+
+bool YarpGazeboControlBoard::getAxes(int *ax)
+{
+    return false;
+}
 
 bool YarpGazeboControlBoard::resetEncoder(int j)
 {
@@ -45,12 +49,12 @@ bool YarpGazeboControlBoard::getEncoderSpeed(int j, double *sp)
 bool YarpGazeboControlBoard::getEncoderSpeeds(double *spds)
 {
     return false;
-}   
+}
 
 bool YarpGazeboControlBoard::getEncoderAcceleration(int j, double *spds)
 {
     return false;
-}   
+}
 
 bool YarpGazeboControlBoard::getEncoderAccelerations(double *accs)
 {

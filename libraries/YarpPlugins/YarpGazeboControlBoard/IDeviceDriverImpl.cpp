@@ -1,4 +1,3 @@
-
 #include "YarpGazeboControlBoard.hpp"
 
 #include <cstddef>

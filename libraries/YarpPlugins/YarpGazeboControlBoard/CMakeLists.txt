@@ -25,8 +25,7 @@ find_package(Boost REQUIRED)
 if(NOT SKIP_YarpGazeboControlBoard)
 
     yarp_add_plugin(YarpGazeboControlBoard YarpGazeboControlBoard.hpp
-                                            DeviceDriverImpl.cpp
-                                            EmulatedControlBoard.cpp
+                                            IDeviceDriverImpl.cpp
                                             IControlLimitsImpl.cpp
                                             IControlModeImpl.cpp
                                             IEncodersImpl.cpp
