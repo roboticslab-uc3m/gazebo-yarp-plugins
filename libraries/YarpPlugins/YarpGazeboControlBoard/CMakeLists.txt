@@ -32,10 +32,10 @@ if(NOT SKIP_YarpGazeboControlBoard)
                                             IPositionControlImpl.cpp
                                             IPositionDirectImpl.cpp
                                             IVelocityControlImpl.cpp
+                                            PeriodicThreadImpl.cpp
+                                            SharedArea.cpp
                                             LogComponent.cpp
-                                            LogComponent.hpp
-                                            #PeriodicThreadImpl.cpp
-                                            SharedArea.cpp)
+                                            LogComponent.hpp)
 
     target_link_libraries(YarpGazeboControlBoard YARP::YARP_os
                                                    YARP::YARP_dev

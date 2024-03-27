@@ -7,7 +7,7 @@
 #include <yarp/dev/Drivers.h>
 #include <yarp/dev/PolyDriver.h>
 #include <yarp/dev/ControlBoardInterfaces.h>
-//#include <yarp/os/PeriodicThread.h>
+#include <yarp/os/PeriodicThread.h>
 #include <yarp/os/Semaphore.h>
 
 // Incluir las bibliotecas de Gazebo necesarias
@@ -25,14 +25,14 @@ namespace roboticslab {
                                    public yarp::dev::IEncoders,
                                    public yarp::dev::IPositionControl,
                                    public yarp::dev::IPositionDirect,
-                                   public yarp::dev::IVelocityControl
-                                   //public yarp::dev::PeriodicThread
+                                   public yarp::dev::IVelocityControl,
+                                   public yarp::os::PeriodicThread
     {
 
         public:
 
             // Set the thread period in the class constructor
-            //YarpGazeboControlBoard() : PeriodicThread(1.0) {} // In seconds
+            YarpGazeboControlBoard() : PeriodicThread(1.0) {} // In seconds
 
             // ------ DeviceDriver declarations. Implementation in IDeviceDriver.cpp ------
             bool open(yarp::os::Searchable& config) override;
@@ -111,8 +111,8 @@ namespace roboticslab {
             virtual bool getRefVelocities(const int n_joint, const int *joints, double *vels) override;
 
             // -------- PeriodicThread declarations. Implementation in PeriodicThreadImpl.cpp --------
-            //bool threadInit() override;
-            //void run() override;
+            bool threadInit() override;
+            void run() override;
 
             // ----- Shared Area Funcion declarations. Implementation in SharedArea.cpp -----
             void setEncRaw(const int index, const double position);
