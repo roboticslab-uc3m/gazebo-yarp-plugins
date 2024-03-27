@@ -34,7 +34,7 @@ if(NOT SKIP_YarpGazeboControlBoard)
                                             IVelocityControlImpl.cpp
                                             LogComponent.cpp
                                             LogComponent.hpp
-                                            PeriodicThreadImpl.cpp
+                                            #PeriodicThreadImpl.cpp
                                             SharedArea.cpp)
 
     target_link_libraries(YarpGazeboControlBoard YARP::YARP_os

@@ -7,13 +7,15 @@
 #include <yarp/dev/Drivers.h>
 #include <yarp/dev/PolyDriver.h>
 #include <yarp/dev/ControlBoardInterfaces.h>
-#include <yarp/os/PeriodicThread.h>
+//#include <yarp/os/PeriodicThread.h>
+#include <yarp/os/Semaphore.h>
 
 // Incluir las bibliotecas de Gazebo necesarias
 #include <gazebo/gazebo.hh>
 #include <gazebo/physics/physics.hh>
 #include <gazebo/common/common.hh>
 #include <gazebo/msgs/msgs.hh>
+
 
 namespace roboticslab {
 
@@ -23,14 +25,14 @@ namespace roboticslab {
                                    public yarp::dev::IEncoders,
                                    public yarp::dev::IPositionControl,
                                    public yarp::dev::IPositionDirect,
-                                   public yarp::dev::IVelocityControl,
-                                   public yarp::dev::PeriodicThread
+                                   public yarp::dev::IVelocityControl
+                                   //public yarp::dev::PeriodicThread
     {
 
         public:
 
             // Set the thread period in the class constructor
-            YarpGazeboControlBoard() : PeriodicThread(1.0) {} // In seconds
+            //YarpGazeboControlBoard() : PeriodicThread(1.0) {} // In seconds
 
             // ------ DeviceDriver declarations. Implementation in IDeviceDriver.cpp ------
             bool open(yarp::os::Searchable& config) override;
@@ -109,8 +111,8 @@ namespace roboticslab {
             virtual bool getRefVelocities(const int n_joint, const int *joints, double *vels) override;
 
             // -------- PeriodicThread declarations. Implementation in PeriodicThreadImpl.cpp --------
-            bool threadInit() override;
-            void run() override;
+            //bool threadInit() override;
+            //void run() override;
 
             // ----- Shared Area Funcion declarations. Implementation in SharedArea.cpp -----
             void setEncRaw(const int index, const double position);
@@ -122,13 +124,35 @@ namespace roboticslab {
 
         private:
 
+            enum jmc_state { NOT_CONTROLLING, POSITION_MOVE, RELATIVE_MOVE, VELOCITY_MOVE };
+            enum jmc_mode { POSITION_MODE, VELOCITY_MODE, POSITION_DIRECT_MODE };
+
+            bool setPositionMode(int j);
+            bool setVelocityMode(int j);
+            bool setTorqueMode(int j);
+            bool setPositionDirectMode(int j);
+
+            // General Joint Motion Controller parameters //
             unsigned int axes;
+            double jmcMs;
+            jmc_mode controlMode;
+            double lastTime;
 
             yarp::os::Semaphore encRawMutex;  // SharedArea
 
+            std::vector<jmc_state> jointStatus;
+
             std::vector<double> encRaw;
-            std::vector<double> encRawExposed;
-            std::vector<double> targetExposed;
+            std::vector<double> encRawExposed;  // For conversion.
+            std::vector<double> initPos;  // Exposed.
+            std::vector<double> jointTol;  // Exposed.
+            std::vector<double> maxLimit;  // Exposed.
+            std::vector<double> minLimit;  // Exposed.
+            std::vector<double> refAcc;  // Exposed.
+            std::vector<double> refSpeed;  // Exposed.
+            std::vector<double> targetExposed;  // Exposed.
+            std::vector<double> velRawExposed;  // For conversion.
+            std::vector<double> velRaw;
 
             gazebo::physics::ModelPtr _robotModel;
 
