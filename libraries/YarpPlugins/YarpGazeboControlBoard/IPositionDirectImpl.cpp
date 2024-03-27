@@ -6,11 +6,6 @@
 
 using namespace roboticslab;
 
-bool YarpGazeboControlBoard::getAxes(int *ax)
-{
-    return false;
-}
-
 bool YarpGazeboControlBoard::setPosition(int j, double ref)
 {
     return false;

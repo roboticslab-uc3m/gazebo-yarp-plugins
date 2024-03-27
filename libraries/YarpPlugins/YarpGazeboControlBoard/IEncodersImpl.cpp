@@ -6,10 +6,6 @@
 
 using namespace roboticslab;
 
-bool YarpGazeboControlBoard::getAxes(int *ax)
-{
-    return false;
-}
 
 bool YarpGazeboControlBoard::resetEncoder(int j)
 {
